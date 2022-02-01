@@ -12,7 +12,7 @@ function ContentWrapper(){
                 <div id="content">
                     <TopBar />
                     <ContentRowTop />
-                    <Movie />
+                    {/*<!--<Movie /> -->*/}
                     <Footer />
                 </div>
             </div>    

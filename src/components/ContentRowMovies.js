@@ -1,17 +1,5 @@
-import react from 'react';
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import SmallCard from './SmallCard';
-
-let amount ={
-    color:   "success",
-    titulo: "Total awards",
-    valor: 79,
-    icono: "fas fa-award",
-}
-
-
-let cardProps = [amount];
-
 
 function ContentRowTop(){
     const [productCount, setProductCount] = React.useState(0);
@@ -21,36 +9,44 @@ function ContentRowTop(){
         .then(res => setProductCount(res.data.count))    
     }, [] )
 
-    //const [userCount, setUserCount] = React.useState(0);
-    //React.useEffect(function(){
-    //    fetch("http://localhost:3500/api/categories")
-    //    .then(res => res.json())
-    //    .then(res => setUserCount(res.data.count))    
-    //}, [] )
-
     const [userCount, setUserCount] = React.useState(0);
     React.useEffect(function(){
         fetch("http://localhost:3500/api/users")
         .then(res => res.json())
         .then(res => setUserCount(res.data.count))    
-    }, [] )
+    }, [])
 
+     const [categoryCount, setCategoryCount] = React.useState(0);
+     React.useEffect(function(){
+         fetch("http://localhost:3500/api/products")
+         .then(res => res.json())
+         .then(res => setCategoryCount(res.data.catCount))    
+     }, [] )
 
     return (
         <React.Fragment>
         {/*<!-- Content Row -->*/}
         <div className="row">
-
-            {productCount && <SmallCard color= {"primary"} titulo= {"Games in DB"} valor={productCount} icono= "fas fa-film" />}
-            
-            {userCount && <SmallCard color= {"warning"} titulo= {"Users in DB"} valor={userCount} icono= "fas fa-user" />}
-
-            {
-                cardProps.map((producto,index)=>{
-                    return <SmallCard  {...producto}  key= {index}/>
-                })
-            }      
+            <SmallCard
+                color="primary"
+                titulo="Games in DB"
+                valor={productCount} 
+                icono= "fas fa-film" 
+            />
+            <SmallCard
+                color="success"
+                titulo="Users in DB"
+                valor={userCount} 
+                icono= "fas fa-user" 
+            />
+            { <SmallCard
+                color="warning"
+                titulo="Categories"
+                valor={categoryCount} 
+                icono= "fas fa-tags" 
+            /> }
         </div>
+
         </React.Fragment>
     )
 }

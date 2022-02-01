@@ -5,10 +5,10 @@ function MovieList(props){
         <React.Fragment>
             <tr>
                 <td>{props.id}</td>
-                <td>{props.title}</td>
-                <td>{props.rating}</td>
-                <td>{props.awards}</td>
-                <td>{props.length}</td>
+                <td>{props.name}</td>
+                <td>{props.price}</td>
+                <td>{props.description}</td>
+                <td>{props.console}</td>
             </tr>
         </React.Fragment>
     )
